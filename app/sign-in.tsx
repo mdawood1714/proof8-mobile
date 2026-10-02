@@ -10,6 +10,7 @@ import {
   View,
 } from 'react-native';
 import { ArrowLeft, Building2, CircleUserRound, Eye, EyeOff, UserKey } from 'lucide-react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EnvBadge } from '../components/EnvBadge';
 import { FilledButton } from '../components/FilledButton';
 import { GoogleIcon } from '../components/GoogleIcon';
@@ -26,6 +27,7 @@ type Step = 'email' | 'password' | 'sso' | 'sso-lookup';
 
 export default function SignIn() {
   const { signIn, signInWithGoogle, signInWithSso } = useAuth();
+  const insets = useSafeAreaInsets();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -125,7 +127,6 @@ export default function SignIn() {
       autoCorrect={false}
       keyboardType="email-address"
       textContentType="emailAddress"
-      autoComplete="email"
       returnKeyType="next"
       onSubmitEditing={onSubmitEditing}
       icon={<UserKey size={18} color={colors.textMuted} />}
@@ -137,7 +138,13 @@ export default function SignIn() {
       style={styles.screen}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
-      <ScrollView contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
+      <ScrollView
+        contentContainerStyle={[
+          styles.scroll,
+          { paddingTop: insets.top + 16, paddingBottom: insets.bottom + 32 },
+        ]}
+        keyboardShouldPersistTaps="handled"
+      >
         <View style={styles.header}>
           <Logo size={26} />
           <EnvBadge />
@@ -192,7 +199,6 @@ export default function SignIn() {
                 autoCapitalize="none"
                 autoCorrect={false}
                 textContentType="password"
-                autoComplete="password"
                 returnKeyType="go"
                 onSubmitEditing={onSubmit}
                 autoFocus

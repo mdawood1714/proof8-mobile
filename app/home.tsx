@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { router } from 'expo-router';
 import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { FilledButton } from '../components/FilledButton';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Unauthorized } from '../lib/api';
 import { useAuth } from '../lib/AuthContext';
 import { colors, fontFamily, radii } from '../lib/theme';
@@ -13,6 +14,7 @@ type Profile = {
 
 export default function Home() {
   const { session, refresh, signOut } = useAuth();
+  const insets = useSafeAreaInsets();
   const [callState, setCallState] = useState<'loading' | 'ok' | 'error'>('loading');
   const [profile, setProfile] = useState<Profile>({});
   const [error, setError] = useState<string | null>(null);
@@ -65,7 +67,13 @@ export default function Home() {
   };
 
   return (
-    <ScrollView style={styles.screen} contentContainerStyle={styles.scroll}>
+    <ScrollView
+      style={styles.screen}
+      contentContainerStyle={[
+        styles.scroll,
+        { paddingTop: insets.top + 24, paddingBottom: insets.bottom + 20 },
+      ]}
+    >
       <Text style={styles.title}>SIGNED IN</Text>
 
       <View style={styles.card}>

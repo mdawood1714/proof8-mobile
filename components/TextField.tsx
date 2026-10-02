@@ -10,6 +10,7 @@ type Props = TextInputProps & {
 
 export const TextField = ({ label, required, icon, style, onFocus, onBlur, editable, ...inputProps }: Props) => {
   const [focused, setFocused] = useState(false);
+  const isWeb = Platform.OS === 'web';
   const locked = editable === false;
 
   return (
@@ -24,11 +25,11 @@ export const TextField = ({ label, required, icon, style, onFocus, onBlur, edita
           placeholderTextColor={colors.textDisabled}
           editable={editable}
           onFocus={(e) => {
-            setFocused(true);
+            if (isWeb) setFocused(true);
             onFocus?.(e);
           }}
           onBlur={(e) => {
-            setFocused(false);
+            if (isWeb) setFocused(false);
             onBlur?.(e);
           }}
           {...inputProps}
