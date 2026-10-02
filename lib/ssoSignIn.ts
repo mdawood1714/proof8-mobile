@@ -9,15 +9,10 @@ const firebaseAuth = (): FirebaseAuthModule => require('@react-native-firebase/a
 
 export class SsoCancelled extends Error {}
 
-const CANCELLED_CODES = [
-  'auth/user-cancelled',
-  'auth/cancelled-popup-request',
-  'auth/popup-closed-by-user',
-  'auth/web-context-cancelled',
-];
-
-const isCancellation = (e: unknown) =>
-  typeof e === 'object' && e !== null && CANCELLED_CODES.includes((e as { code?: string }).code ?? '');
+const isCancellation = (e: unknown) => {
+  const code = typeof e === 'object' && e !== null ? String((e as { code?: string }).code ?? '') : '';
+  return /cancel|popup-closed/i.test(code);
+};
 
 export const signInWithSso = async (provider: SsoProvider): Promise<FirebaseSession> => {
   if (isExpoGo) throw new NeedsInstalledBuild('Company single sign-on');

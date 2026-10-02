@@ -5,14 +5,10 @@ import { FirebaseSession } from './storage';
 
 export class SsoCancelled extends Error {}
 
-const CANCELLED_CODES = [
-  'auth/popup-closed-by-user',
-  'auth/cancelled-popup-request',
-  'auth/user-cancelled',
-];
-
-const isCancellation = (e: unknown) =>
-  typeof e === 'object' && e !== null && CANCELLED_CODES.includes((e as { code?: string }).code ?? '');
+const isCancellation = (e: unknown) => {
+  const code = typeof e === 'object' && e !== null ? String((e as { code?: string }).code ?? '') : '';
+  return /cancel|popup-closed/i.test(code);
+};
 
 export const signInWithSso = async (provider: SsoProvider): Promise<FirebaseSession> => {
   if (!isFirebaseWebConfigured()) throw new FirebaseWebNotConfigured();

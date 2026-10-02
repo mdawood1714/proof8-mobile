@@ -109,7 +109,10 @@ export default function SignIn() {
       await signInWithSso(provider);
       router.replace('/home');
     } catch (e) {
-      if (e instanceof SsoCancelled) return;
+      if (e instanceof SsoCancelled) {
+        setStep('email');
+        return;
+      }
       setError(e instanceof Error ? e.message : `Could not sign in with ${provider.label}.`);
     } finally {
       setSsoLoading(false);
