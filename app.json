@@ -1,15 +1,20 @@
 {
   "expo": {
-    "name": "proof8-mobile",
+    "name": "Proof 8",
     "slug": "proof8-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "scheme": "proof8-mobile",
     "userInterfaceStyle": "light",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.proof8.mobile",
+      "googleServicesFile": "./firebase/GoogleService-Info.plist"
     },
     "android": {
+      "package": "com.proof8.mobile",
+      "googleServicesFile": "./firebase/google-services.json",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -20,6 +25,41 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-secure-store",
+      "expo-router",
+      "expo-font",
+      "expo-status-bar",
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth",
+      "@react-native-google-signin/google-signin"
+    ],
+    "extra": {
+      "googleWebClientId": "916938989890-hoj5mr3o9ofp4rjntt21hgu08a5r6p1l.apps.googleusercontent.com",
+      "googleIosClientId": "916938989890-fenbkubejd2a09ebi8537pg9dpe09i3b.apps.googleusercontent.com",
+      "ssoProviders": {
+        "flakeian.com": {
+          "id": "oidc.okta-demo",
+          "label": "Okta"
+        },
+        "acme-distillery.com": {
+          "id": "oidc.okta-demo",
+          "label": "Okta"
+        }
+      },
+      "firebaseWebConfig": {
+        "apiKey": "AIzaSyC7vNWQgYX5ZMN6aGBpisQbukyicPhhWHU",
+        "authDomain": "proof8-mobile-demo.firebaseapp.com",
+        "projectId": "proof8-mobile-demo",
+        "appId": "1:916938989890:web:e918fb401d9d87f24468db",
+        "messagingSenderId": "916938989890"
+      },
+      "router": {},
+      "eas": {
+        "projectId": "f7a2908a-379e-425f-9138-59bc824fd29f"
+      }
+    },
+    "owner": "muhammaddawood1714"
   }
 }
