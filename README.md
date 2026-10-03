@@ -37,9 +37,10 @@ Adding a customer is one Firebase OIDC provider plus one line here. In productio
 npm install
 npx expo start --web                                          # browser
 npx eas-cli build --profile preview --platform android       # installable Android build
+npx expo export -p web && npx firebase-tools deploy --only hosting   # web build on Firebase Hosting
 ```
 
-Expo Go supports Proof 8 password sign-in only, because it cannot load the native Firebase modules.
+Expo Go (`npx expo start --go`) supports Proof 8 password sign-in only, because it cannot load the native Firebase modules.
 
 ## Configuration
 

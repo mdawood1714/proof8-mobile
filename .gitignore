@@ -43,3 +43,7 @@ yarn-error.*
 # Firebase config files - not committed
 firebase/*.plist
 firebase/*.json
+
+# Firebase CLI
+.firebase/
+firebase-debug.log
